@@ -1,11 +1,3 @@
-/******************************************************************************
-
-                            Online C Compiler.
-                Code, Compile, Run and Debug C program online.
-Write your code in this editor and press "Run" button to compile and execute it.
-
-*******************************************************************************/
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -34,10 +26,14 @@ void Empilha (int y, celula *p) {
 }
 
 void imprimirPilha(celula *p){
+    
     printf("\n---------- PILHA ----------\n");
     
     while(p){
-        imprimirNumero(p->valor);
+        if (p->valor !=0){
+            imprimirNumero(p->valor);
+        }
+        
         p = p-> seg;
     }
     
@@ -57,14 +53,14 @@ int main()
     printf("Digite quantos numeros voce quer inserir: ");
     scanf("%d", &n);
     
-    int lista[n+1];
+    int lista[n];
     lista[0] = p-> valor;
-    for (int i = 1; i < n+1; i++) {
+    for (int i = 0; i < n; i++) {
         printf("Digite o %dº numero: ", i+1);
         scanf("%d", &lista[i]);
     }
     
-    // Ordenar a lista em ordem crescente usando o algoritmo de bubble sort
+    //ordenar a lista em ordem crescente
     for (int i = 0; i < n-1; i++) {
         for (int j = 0; j < n-i-1; j++) {
             if (lista[j] > lista[j+1]) {
@@ -75,6 +71,7 @@ int main()
         }
     }
     
+    //chamada para distribuir os numeros para as celulas
      for (int i = 0; i < n; i++) {
         Empilha(lista[i], p);
     }
@@ -85,5 +82,4 @@ int main()
 
     return 0;
 }
-
 
