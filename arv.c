@@ -53,24 +53,26 @@ struct Telefone* encontrarMenorValor(struct Telefone* no) {
 }
 
 struct Telefone* remover(struct Telefone* raiz, long numero) {
+    
     if (raiz == NULL) {
         return raiz;
     }
+    
     if (numero < raiz->numero) {
         raiz->esquerda = remover(raiz->esquerda, numero);
     }
+    
     else if (numero > raiz->numero) {
         raiz->direita = remover(raiz->direita, numero);
     }
     else {
-        // Encontrou o elemento a ser removido
 
-        // Caso 1: O nó a ser removido é uma folha (não tem filhos)
         if (raiz->esquerda == NULL && raiz->direita == NULL) {
             free(raiz);
             raiz = NULL;
         }
-        // Caso 2: O nó a ser removido tem apenas um filho
+        
+        // -
         else if (raiz->esquerda == NULL) {
             struct Telefone* temp = raiz;
             raiz = raiz->direita;
@@ -81,11 +83,11 @@ struct Telefone* remover(struct Telefone* raiz, long numero) {
             raiz = raiz->esquerda;
             free(temp);
         }
-        // Caso 3: O nó a ser removido tem dois filhos
+        
         else {
             struct Telefone* temp = encontrarMenorValor(raiz->direita);
 
-            // Copia os valores do sucessor para o nó a ser removido
+            // ->
             raiz->numero = temp->numero;
             strcpy(raiz->nome, temp->nome);
 
